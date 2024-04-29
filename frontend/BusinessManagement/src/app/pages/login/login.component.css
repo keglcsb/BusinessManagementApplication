@@ -1,0 +1,7 @@
+.container {
+  border-style: solid;
+  border-color: dodgerblue;
+  border-radius: 50px;
+  width: 25%;
+  padding: 24px;
+}

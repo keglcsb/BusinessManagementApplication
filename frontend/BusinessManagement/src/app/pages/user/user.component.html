@@ -1,0 +1,28 @@
+<div class="mt-3 w-75 offset-1">
+  <div *ngIf="this.currentUser.role === Role.OWNER" class="d-flex flex-wrap justify-content-start">
+    <button class="bg-primary text-light my-3" (click)="goToRegister()">Új alkalmazott felvétele</button>
+  </div>
+  <table class="table table-responsive-lg table-striped shadow table-hover">
+    <thead class="thead">
+      <tr>
+        <th>Teljes név</th>
+        <th>Email</th>
+        <th>Jogosultságok</th>
+        <th *ngIf="this.currentUser.role === Role.OWNER">Kereset</th>
+        <th *ngIf="this.currentUser.role > 1"></th>
+      </tr>
+    </thead>
+    <tbody class="tbody">
+      <tr *ngFor="let user of users">
+        <td class="cursor p-3" [routerLink]="['/profile', user.id]">{{user.firstName}} {{user.lastName}}</td>
+        <td class="cursor p-3" [routerLink]="['/profile', user.id]" >{{user.email}}</td>
+        <td class="p-3">{{Object.values(Role)[user.role]}}
+          <button class="p-1 m-1 bg-info text-light" *ngIf="this.currentUser.role > 1 && user.id != currentUser.id" (click)="promote(user)">Előléptet</button>
+          <button class="p-1 m-1 bg-danger text-light" *ngIf="this.currentUser.role > 1 && user.id != currentUser.id" (click)="demote(user)">Visszavon</button>
+        </td>
+        <td *ngIf="this.currentUser.role === Role.OWNER" class="p-3">{{user.salary}}</td>
+        <td class="p-3"><button class="bg-danger text-light" *ngIf="this.currentUser.role > 1 && user.id != currentUser.id" (click)="delete(user)">Törlés</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

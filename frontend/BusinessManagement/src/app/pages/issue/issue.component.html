@@ -1,0 +1,5 @@
+<div class="d-flex justify-content-center flex-wrap modal-dialog-scrollable">
+  <div *ngFor="let i of issues" class="m-4 shadow w-25" [routerLink]="['/tasks',i.id]">
+    <app-card [issue]="i" ></app-card>
+  </div>
+</div>

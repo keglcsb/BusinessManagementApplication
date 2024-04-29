@@ -1,0 +1,15 @@
+table {
+  margin-left: 0px;
+}
+
+.cursor{
+  cursor: pointer;
+}
+
+button {
+  border-radius: 50px;
+  text-align: center;
+  border: 0;
+}
+
+

@@ -1,0 +1,42 @@
+<div class="container mt-3 offset-1">
+  <div class="d-block p-lg-5 w-75 border-2">
+    <div class="row justify-content-evenly">
+      <div class="mb-4 w-auto">
+        <h1 class="text-primary text-capitalize">{{this.user.firstName}} {{this.user.lastName}}</h1>
+        <h4>Email: {{this.user.email}}</h4>
+        <h4>Jogosultságok: {{Object.values(Role)[this.user.role]}}</h4>
+        <h4 *ngIf="this.currentUser.role === Role.OWNER">Kereset: {{this.user.salary}}</h4>
+      </div>
+      <div *ngIf="this.currentUser.role === Role.OWNER && this.currentUser.id !== user.id" class="form-outline mb-4 w-auto">
+        <form>
+          <div class="row justify-content-start mt-3">
+            <div class="form-outline mb-4 w-auto">
+              <label class="form-label" >Új kereset:</label>
+              <input class="form-control"  [formControl]="salary" type="number" required>
+              <button type="submit" class="btn btn-primary btn-block mb-4 w-auto my-2" (click)="changeSalary()">Módosítás</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="this.currentUser.id === user.id" class="form-outline mb-4 w-auto">
+        <form [formGroup]="passwordChangeForm">
+              <h4>Jelszómódosítás</h4>
+          <div class="row justify-content-start mt-3">
+            <div class="form-outline mb-4 w-auto">
+                <label class="form-label" >Régi jelszó:</label>
+                <input class="form-control" type="password" formControlName="oldPassword">
+                <label class="form-label" >Új jelszó:</label>
+                <input class="form-control" type="password" formControlName="password">
+                <label class="form-label" >Új jelszó ismét:</label>
+                <input class="form-control" type="password" formControlName="repassword">
+              <button type="submit" class="btn btn-primary btn-block mb-4 w-auto my-2" (click)="changePassword()">Módosítás</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div>
+
+    </div>
+  </div>
+</div>

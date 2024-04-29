@@ -1,0 +1,40 @@
+<div class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="form-outline mb-4 w-25">
+      <form>
+        <label class="form-label">Név:</label>
+        <input [attr.disabled]="disabled" class="form-control" [formControl]="name">
+        <label class="form-label">Vezető:</label>
+        <select *ngIf="!id" class="form-select" [formControl]="leader" >
+          <option  *ngFor="let employee of assignableEmployees" [value]="employee.id" >{{employee.firstName}} {{employee.lastName}}</option>
+        </select>
+        <select *ngIf="id" class="form-select" [formControl]="leaderMod" >
+          <option  *ngFor="let employee of group.members" [value]="employee.id" >{{employee.firstName}} {{employee.lastName}}</option>
+        </select>
+        <button *ngIf="!id" type="button" class="btn btn-primary border-0 my-2" (click)="addGroup()">Létrehozás</button>
+        <button *ngIf="id" type="submit" class="btn btn-primary border-0 my-2" (click)="modify()">Módosítás</button>
+      </form>
+      <form *ngIf="id">
+        <label class="form-label">Tag felvétele:</label>
+        <select class="form-select" [formControl]="assigned">
+          <option *ngFor="let employee of assignableEmployees" [value]="employee.id">{{employee.firstName}} {{employee.lastName}}</option>
+        </select>
+        <button type="submit" class="btn btn-primary border-0 my-2" (click)="assign()">Felvétel</button>
+      </form>
+      <div *ngIf="id">
+        <button class="btn btn-danger border-0 my-4" (click)="delete()">Csoport megszüntetése</button>
+      </div>
+    </div>
+    <div *ngIf="id" class="d-grid h-100 w-auto">
+      <h5>Tagok:</h5>
+      <div *ngFor="let employee of group.members" class="d-inline-flex flex-wrap">
+        <div class="mx-2">
+          <p class="text-capitalize">{{employee.firstName}} {{employee.lastName}}</p>
+        </div>
+        <div>
+          <button *ngIf="group.leader.id != employee.id" (click)="remove(employee.id)">Törlés</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

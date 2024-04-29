@@ -1,0 +1,6 @@
+app-card {
+  cursor: pointer;
+}
+div .w-25 {
+  min-width: 300px;
+}

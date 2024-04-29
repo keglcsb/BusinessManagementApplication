@@ -1,0 +1,22 @@
+<div class="mt-3 w-75">
+  <table class="table table-responsive-lg table-striped shadow table-hover">
+    <thead class="thead">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody class="tbody">
+    <tr *ngFor="let issue of issues" [routerLink]="['/tasks', issue.id]">
+      <td>{{issue.id}}</td>
+      <td>{{issue.name}}</td>
+      <td>{{issue.date}}</td>
+      <td><button>Módosítás</button></td>
+      <td><button>Törlés</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

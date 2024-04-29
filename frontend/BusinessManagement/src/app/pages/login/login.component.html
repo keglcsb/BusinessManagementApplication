@@ -1,0 +1,19 @@
+<form>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="form-outline mb-4 w-auto">
+        <label class="form-label">Email:</label>
+        <input id="username" type="email" class="form-control" [formControl]="email" required>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="form-outline mb-4 w-auto">
+        <label class="form-label">Jelszó:</label>
+        <input id="password" type="password" class="form-control" [formControl]="password" required>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <button id="loginButton" type="submit" (click)="login()"  class="btn btn-primary btn-block mb-4 w-auto">Bejelentkezés</button>
+    </div>
+  </div>
+</form>

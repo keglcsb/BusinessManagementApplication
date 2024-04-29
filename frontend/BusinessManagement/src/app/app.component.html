@@ -1,0 +1,9 @@
+<app-navbar *ngIf="isLoggedIn" (Logout)="LoggedInChanged($event)"></app-navbar>
+<div class="content" [ngClass]="{'LoggedIn':isLoggedIn}">
+  <div *ngIf="isLoggedIn">
+    <router-outlet></router-outlet>
+  </div>
+  <div *ngIf="!isLoggedIn">
+    <app-login (loggedIn)="LoggedInChanged($event)"></app-login>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+.content {
+  margin-right: auto;
+  &.LoggedIn{
+    padding-left: 200px;
+  }
+}
