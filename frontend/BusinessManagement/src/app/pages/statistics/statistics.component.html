@@ -1,0 +1,16 @@
+<div *ngIf="users.length != 0" class="container mt-3 w-75 offset-1">
+  <table class="table table-responsive-lg table-striped shadow table-hover">
+    <thead class="thead">
+    <tr>
+      <th>Teljes név</th>
+      <th>Érték mutató</th>
+    </tr>
+    </thead>
+    <tbody class="tbody">
+    <tr *ngFor="let user of users">
+      <td class="p-3">{{user.firstName}} {{user.lastName}}</td>
+      <td>{{user.value | value}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

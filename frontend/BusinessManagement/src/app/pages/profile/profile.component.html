@@ -1,4 +1,4 @@
-<div class="container mt-3 offset-1">
+<div *ngIf="user" class="container mt-3 offset-1">
   <div class="d-block p-lg-5 w-75 border-2">
     <div class="row justify-content-evenly">
       <div class="mb-4 w-auto">
@@ -36,7 +36,22 @@
       </div>
     </div>
     <div>
-
+      <table *ngIf="issues.length !== 0" class="table table-responsive-lg table-striped shadow table-hover">
+        <thead class="thead">
+        <tr>
+          <th>Megnevezés</th>
+          <th>Státusz</th>
+          <th *ngIf="currentUser.role == Role.OWNER">Érték</th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        <tr *ngFor="let issue of issues" [routerLink]="['/tasks', issue.id]">
+          <td>{{issue.name}}</td>
+          <td>{{issue.status | status}}</td>
+          <td *ngIf="currentUser.role == Role.OWNER">{{issue.value}}</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

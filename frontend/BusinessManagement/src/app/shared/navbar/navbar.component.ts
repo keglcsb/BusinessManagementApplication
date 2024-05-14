@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {Router} from "@angular/router";
 import {AuthService} from "../service/auth.service";
-import {User} from "../model/User";
+import {Role, User} from "../model/User";
 
 @Component({
   selector: 'app-navbar',
@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit{
   activeArchive: boolean = false;
   activeUsers: boolean = false;
   activeGroups: boolean = false;
+  activeStatistics: boolean = false;
 
   currentUser!:User;
   constructor(private router:Router, private auth:AuthService) {
@@ -28,7 +29,7 @@ export class NavbarComponent implements OnInit{
     })
   }
   logout(){
-    localStorage.clear();
+    sessionStorage.clear();
     this.router.navigateByUrl('/login');
     this.Logout.emit(false);
   }
@@ -39,6 +40,7 @@ export class NavbarComponent implements OnInit{
     this.activeArchive = false;
     this.activeUsers = false;
     this.activeGroups = false;
+    this.activeStatistics = false;
   }
   goToProfile() {
     this.setAllInactive();
@@ -72,4 +74,12 @@ export class NavbarComponent implements OnInit{
     this.activeGroups = true;
     this.router.navigateByUrl('/group');
   }
+
+  goToStatistics() {
+    this.setAllInactive();
+    this.activeStatistics = true;
+    this.router.navigateByUrl('/statistics');
+  }
+
+  protected readonly Role = Role;
 }

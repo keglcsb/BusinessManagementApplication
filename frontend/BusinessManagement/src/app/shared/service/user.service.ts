@@ -37,4 +37,8 @@ export class UserService {
   delete(user:User){
     return this.http.delete("http://localhost:8080/employee/", {body:user});
   }
+
+  getStats(){
+    return this.http.get("http://localhost:8080/employee/stats");
+  }
 }

@@ -1,5 +1,46 @@
-<div class="container mt-3">
+<div *ngIf="issue" class="container mt-3">
   <h1 class="text-primary">
-    {{this.TaskId}}
+    {{this.issue.name}}
   </h1>
+  <div class="row justify-content-center">
+    <div class="d-block w-50">
+      <h4>Státusz: {{issue.status.valueOf() | status}}
+        <button *ngIf="issue.status === 2" class="btn btn-success px-2 mx-3" (click)="changeStatus()">Megnyitás</button>
+        <button *ngIf="issue.status === 0" class="btn btn-success px-2 mx-3" (click)="changeStatus()">Lezárás</button></h4>
+      <h4 *ngIf="currentUser.role==Role.OWNER">Érték: {{issue.value}}</h4>
+      <h4>Létrehozás dátuma:</h4><p class="text-black">{{issue.issuedAt | date}}</p>
+      <h4>Létrehozta: {{issue.creator.firstName}} {{issue.creator.lastName}}</h4>
+      <h4>Jóváhagyás dátuma:</h4><p *ngIf="issue.approvedAt" class="text-black">{{issue.approvedAt | date}}</p>
+      <span class="d-inline-flex align-items-center" *ngIf="!issue.approvedAt">
+        <p class="mt-2">Még nincs jóváhagyva</p>
+        <button *ngIf="currentUser.role > 0" class="mx-4 btn btn-success" (click)="approve()">Jóváhagyás</button>
+      </span>
+      <h4 *ngIf="issue.approver">Jóváhagyta: {{issue.approver.firstName}} {{issue.approver.lastName}}</h4>
+      <h4>Leírás:</h4>
+      <p class="border border-black w-50">{{issue.description}}</p>
+      <form *ngIf="currentUser.role > 0">
+        <label class="form-label">Alkalmazott hozzáadása:</label>
+        <select class="form-select w-50" [formControl]="assigned">
+          <option *ngFor="let employee of assignableEmployees" [value]="employee.id">{{employee.firstName}} {{employee.lastName}}</option>
+        </select>
+        <button type="submit" class="btn btn-primary border-0 my-2" (click)="assign()">Hozzáadás</button>
+      </form>
+      <form *ngIf="currentUser.role > 0">
+        <label class="form-label">Csoport hozzáadása:</label>
+        <select class="form-select w-50" [formControl]="assignedGroup">
+          <option *ngFor="let group of assignableGroups" [value]="group.id">{{group.name}}</option>
+        </select>
+        <button type="submit" class="btn btn-primary border-0 my-2" (click)="assignGroup()">Hozzáadás</button>
+      </form>
+    </div>
+    <div class="d-block w-50">
+      <h3>Felelősök:</h3>
+      <div *ngFor="let user of issue.workers">
+        <span class="d-inline-flex flex-wrap align-items-center justify-content-center border-bottom">
+          <button *ngIf="currentUser.role > 0" class="btn btn-danger h-auto mx-3 py-1" (click)="removeUser(user.id)">Törlés</button>
+          <p class="text-black mt-3 cursor" [routerLink]="['/profile', user.id]">{{user.firstName}} {{user.lastName}}</p>
+        </span>
+      </div>
+    </div>
+  </div>
 </div>

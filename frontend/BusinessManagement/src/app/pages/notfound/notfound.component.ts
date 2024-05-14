@@ -9,11 +9,11 @@ export class NotfoundComponent implements OnChanges, OnInit{
   isLoggedIn:boolean = false;
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.isLoggedIn = localStorage.getItem('username') !== "" || localStorage.getItem('username') !== null;
+    this.isLoggedIn = sessionStorage.getItem('username') !== "" || sessionStorage.getItem('username') !== null;
   }
 
   ngOnInit(): void {
-    this.isLoggedIn = localStorage.getItem('username') !== "" || localStorage.getItem('username') !== null;
+    this.isLoggedIn = sessionStorage.getItem('username') !== "" || sessionStorage.getItem('username') !== null;
   }
 
 

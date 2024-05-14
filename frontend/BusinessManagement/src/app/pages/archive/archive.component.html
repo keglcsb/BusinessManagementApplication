@@ -1,21 +1,20 @@
-<div class="mt-3 w-75">
+<div *ngIf="dataAvailable" class="mt-3 w-75">
+  <div class="d-flex flex-wrap justify-content-start">
+    <button class="bg-primary text-light my-3" (click)="goToAdd()">Új feladat létrehozása</button>
+  </div>
   <table class="table table-responsive-lg table-striped shadow table-hover">
     <thead class="thead">
     <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Date</th>
-      <th></th>
-      <th></th>
+      <th>Megnevezés</th>
+      <th>Státusz</th>
+      <th *ngIf="currentUser.role == Role.OWNER">Érték</th>
     </tr>
     </thead>
     <tbody class="tbody">
     <tr *ngFor="let issue of issues" [routerLink]="['/tasks', issue.id]">
-      <td>{{issue.id}}</td>
       <td>{{issue.name}}</td>
-      <td>{{issue.date}}</td>
-      <td><button>Módosítás</button></td>
-      <td><button>Törlés</button></td>
+      <td>{{issue.status | status}}</td>
+      <td *ngIf="currentUser.role == Role.OWNER">{{issue.value}}</td>
     </tr>
     </tbody>
   </table>

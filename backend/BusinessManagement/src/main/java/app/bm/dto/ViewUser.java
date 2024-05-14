@@ -16,5 +16,4 @@ public class ViewUser {
     private String lastName;
     private int salary;
     private int role;
-    private Set<Issue> issues;
 }

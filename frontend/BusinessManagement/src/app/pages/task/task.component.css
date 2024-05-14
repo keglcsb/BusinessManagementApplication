@@ -1,3 +1,18 @@
 .container {
   margin-left: 150px;
 }
+span p {
+  font-size: 24px;
+}
+.cursor {
+  cursor: pointer;
+}
+
+.border {
+  border-radius: 5px;
+  padding:8px;
+}
+
+.text-black {
+  font-size: 24px;
+}

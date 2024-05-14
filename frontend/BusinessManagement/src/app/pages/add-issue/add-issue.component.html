@@ -1,0 +1,26 @@
+<div class="container mt-3 w-75">
+  <form [formGroup]="addIssue">
+    <div class="row justify-content-center">
+      <div class="form-outline mb-4 w-auto">
+        <label class="form-label">Név:</label>
+        <input formControlName="name" class="form-control" type="text">
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="form-outline mb-4 w-auto">
+        <label class="form-label">Érték:</label>
+        <input formControlName="value" class="form-control" type="number">
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="form-outline mb-4 w-auto">
+        <label class="form-label">Leírás:</label>
+        <input formControlName="desc" class="form-control" type="text">
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <button class="btn btn-primary btn-block mb-4 w-auto" (click)="add()">Létrehozás</button>
+    </div>
+  </form>
+</div>
+

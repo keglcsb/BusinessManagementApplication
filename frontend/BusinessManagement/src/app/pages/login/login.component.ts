@@ -24,7 +24,7 @@ export class LoginComponent {
         password:this.password.value!
       }
       this.auth.login(loginRequest).subscribe( (res: any) => {
-        localStorage.setItem("auth", res.token);
+        sessionStorage.setItem("auth", res.token);
         this.loggedIn.emit(true);
         this.router.navigateByUrl("/home");
       })

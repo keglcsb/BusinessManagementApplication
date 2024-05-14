@@ -35,14 +35,11 @@ export class GroupsetupComponent implements OnInit{
       salary: 0
     })
     this.groupService.getUsersByGroup(null).subscribe(data=>{
-      console.log(data);
       for(let entry of (data as Array<User>)){
         this.assignableEmployees.push(entry);
       }
     });
-    if(!this.id){
-      document.getElementById("assignControl")!.hidden = true;
-    }else {
+    if(this.id){
       this.groupService.getGroup(this.id).subscribe(data => {
         this.group = data as Group;
         this.name.setValue(this.group.name);

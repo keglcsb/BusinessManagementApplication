@@ -1,12 +1,15 @@
 package app.bm.service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import app.bm.dto.*;
 import app.bm.model.Employee;
+import app.bm.model.Issue;
 import app.bm.model.Role;
 import app.bm.repository.EmployeeRepository;
+import app.bm.repository.IssueRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,6 +20,7 @@ import org.springframework.stereotype.Service;
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final IssueRepository issueRepository;
     private final PasswordEncoder passwordEncoder;
 
 
@@ -30,7 +34,6 @@ public class EmployeeService {
                             .firstName(employee.getFirstName())
                             .lastName(employee.getLastName())
                             .salary(employee.getSalary())
-                            .issues(employee.getIssues())
                             .role(employee.getRole().ordinal())
                             .build());
         }
@@ -47,7 +50,6 @@ public class EmployeeService {
                 .lastName(employee.getLastName())
                 .salary(employee.getSalary())
                 .role(employee.getRole().ordinal())
-                .issues(employee.getIssues())
                 .build();
     }
 
@@ -61,7 +63,6 @@ public class EmployeeService {
                     .firstName(employee.getFirstName())
                     .lastName(employee.getLastName())
                     .salary(employee.getSalary())
-                    .issues(employee.getIssues())
                     .role(employee.getRole().ordinal())
                     .build());
         }
@@ -139,4 +140,23 @@ public class EmployeeService {
     }
 
 
+    public List<EmployeeStats> getStats() {
+        if(!employeeRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).getRole().equals(Role.OWNER)) return null;
+        List<EmployeeStats> result = new ArrayList<>();
+        List<Employee> employees = employeeRepository.findAllBy();
+        for (Employee e:employees) {
+            List<Issue> issues = issueRepository.findIssuesByWorkerId(e.getId());
+            double sum = 0;
+            for (Issue i: issues) {
+                sum += i.getValue();
+            }
+            result.add(EmployeeStats.builder()
+                            .firstName(e.getFirstName())
+                            .lastName(e.getLastName())
+                            .value( (sum/e.getSalary()))
+                    .build());
+        }
+        result.sort(Comparator.comparing(EmployeeStats::getValue).reversed());
+        return result;
+    }
 }

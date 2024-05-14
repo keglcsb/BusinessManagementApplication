@@ -18,7 +18,7 @@ public class AuthService {
     private final JwtService jwtService;
 
 
-    public String login(LoginRequest request) throws Exception {
+    public String login(LoginRequest request)  {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -37,7 +37,6 @@ public class AuthService {
                 .firstName(employee.getFirstName())
                 .lastName(employee.getLastName())
                 .salary(employee.getSalary())
-                .issues(employee.getIssues())
                 .role(employee.getRole().ordinal())
                 .build();
     }

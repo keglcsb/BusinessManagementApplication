@@ -17,11 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "issue")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "Workers"})
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "Workers"})
 public class Issue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +40,7 @@ public class Issue {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "approver_id", referencedColumnName = "Id")
     private Employee Approver;
-    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Employee.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Employee.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
             name = "issue_workers",
             joinColumns = @JoinColumn(name = "issueId"),

@@ -73,7 +73,6 @@ public class EmployeeController {
     @PutMapping("/changeSalary")
     public ResponseEntity<String> changeSalary(@RequestBody ChangeSalaryRequest request){
         try {
-            System.out.println(request);
             this.employeeService.changeSalary(request);
             return ResponseEntity.ok("");
         }catch (Exception e){
@@ -89,5 +88,10 @@ public class EmployeeController {
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
         }
+    }
+
+    @GetMapping("/stats")
+    public ResponseEntity<List<EmployeeStats>> getStats(){
+        return ResponseEntity.ok(this.employeeService.getStats());
     }
 }

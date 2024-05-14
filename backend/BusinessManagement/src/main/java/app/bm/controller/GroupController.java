@@ -1,9 +1,6 @@
 package app.bm.controller;
 
-import app.bm.dto.AddGroupRequest;
-import app.bm.dto.AssignOrRemoveGroupRequest;
-import app.bm.dto.GetGroupRequest;
-import app.bm.dto.ViewUser;
+import app.bm.dto.*;
 import app.bm.model.Group;
 import app.bm.service.GroupService;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +18,12 @@ public class GroupController {
     private final GroupService groupService;
 
     @GetMapping("/")
-    public ResponseEntity<List<Group>> getAll(){
+    public ResponseEntity<List<ViewGroup>> getAll(){
         return ResponseEntity.ok(groupService.getAll());
     }
 
     @PostMapping("/")
-    public ResponseEntity<Group> getGroup(@RequestBody GetGroupRequest request){
+    public ResponseEntity<ViewGroup> getGroup(@RequestBody GetGroupRequest request){
         return ResponseEntity.ok(groupService.getGroup(request));
     }
 

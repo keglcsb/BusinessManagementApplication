@@ -7,5 +7,4 @@ public class CreateIssueRequest {
     String name;
     int value;
     String description;
-    Long creatorId;
 }

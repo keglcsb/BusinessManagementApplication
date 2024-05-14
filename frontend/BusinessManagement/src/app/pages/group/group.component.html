@@ -1,4 +1,4 @@
-<div class="mt-3 w-75 offset-1">
+<div *ngIf="dataAvailable" class="mt-3 w-75 offset-1">
   <div class="d-flex flex-wrap justify-content-start">
     <button class="bg-primary text-light my-3" (click)="goToSetup()">Új csoport létrehozása</button>
   </div>
@@ -6,15 +6,11 @@
     <thead class="thead">
     <tr>
       <th>Csoportnév</th>
-      <th></th>
-      <th></th>
     </tr>
     </thead>
     <tbody class="tbody">
     <tr *ngFor="let group of groups">
-      <td class="w-75" [routerLink]="['/groupSettings', group.id]">{{group.name}}</td>
-      <td><button>Módosítás</button></td>
-      <td><button>Törlés</button></td>
+      <td class="cursor" [routerLink]="['/groupSettings', group.id]">{{group.name}}</td>
     </tr>
     </tbody>
   </table>

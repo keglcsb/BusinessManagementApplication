@@ -1,24 +1,22 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Title} from "@angular/platform-browser";
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnDestroy{
+export class AppComponent{
   isLoggedIn: boolean;
 
   constructor(private title:Title) {
     this.title.setTitle("Business Management");
-    let user = localStorage.getItem('auth');
+    let user = sessionStorage.getItem('auth');
     this.isLoggedIn = user !== null;
   }
   LoggedInChanged(value:boolean){
     this.isLoggedIn = value;
   }
 
-  ngOnDestroy(): void {
-    localStorage.clear();
-  }
 }

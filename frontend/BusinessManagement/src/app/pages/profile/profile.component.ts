@@ -4,6 +4,8 @@ import {Role, User} from "../../shared/model/User";
 import {UserService} from "../../shared/service/user.service";
 import {AuthService} from "../../shared/service/auth.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Issue, Status} from "../../shared/model/Issue";
+import {IssueService} from "../../shared/service/issue.service";
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +15,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class ProfileComponent implements OnInit{
   user!:User;
   currentUser!:User;
+  issues:Array<Issue> = new Array<Issue>();
   salary:FormControl = new FormControl("",Validators.required);
   passwordChangeForm:FormGroup = new FormGroup({
     oldPassword: new FormControl("",Validators.required),
@@ -20,7 +23,7 @@ export class ProfileComponent implements OnInit{
     repassword: new FormControl("", Validators.required)
   })
 
-  constructor(private route:ActivatedRoute, private userService:UserService, private auth:AuthService) {
+  constructor(private route:ActivatedRoute, private userService:UserService, private auth:AuthService, private issueService:IssueService) {
   }
   ngOnInit(): void {
     this.auth.getCurrentUser().subscribe(user =>{
@@ -30,7 +33,12 @@ export class ProfileComponent implements OnInit{
     let id = this.route.snapshot.paramMap.get('id')! as unknown as number;
     this.userService.getEmployee(id).subscribe(user => {
       this.user = user as User;
+      this.issueService.getByUser(this.user.id).subscribe(data => {
+        this.issues = data as Array<Issue>;
+      });
     });
+
+
   }
 
   changeSalary() {
@@ -54,4 +62,5 @@ export class ProfileComponent implements OnInit{
   protected readonly Object = Object;
 
 
+  protected readonly Status = Status;
 }

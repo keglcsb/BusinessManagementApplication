@@ -2,10 +2,7 @@ package app.bm.model;
 
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +13,8 @@ import java.util.Set;
 import java.util.List;
 
 @Data
+@ToString(exclude = {"group", "issues"})
+@EqualsAndHashCode(exclude = {"group", "issues"})
 @Entity
 @Builder
 @NoArgsConstructor
@@ -25,7 +24,7 @@ import java.util.List;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id"
 )
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "issues"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Employee implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

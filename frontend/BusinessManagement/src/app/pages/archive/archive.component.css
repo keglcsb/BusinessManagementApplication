@@ -1,3 +1,18 @@
 table {
   margin-left: 150px;
 }
+
+.cursor{
+  cursor: pointer;
+}
+
+div button {
+  margin-left: 150px;
+  border-radius: 50px;
+  text-align: center;
+  border: 0;
+}
+
+td button{
+  margin-left: 0;
+}

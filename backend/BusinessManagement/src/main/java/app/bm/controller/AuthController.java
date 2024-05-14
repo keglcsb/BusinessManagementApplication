@@ -17,7 +17,7 @@ public class AuthController {
     @PostMapping("/")
     public ResponseEntity<LoginResponse> login(
             @RequestBody LoginRequest request
-    ) throws Exception {
+    )  {
         return ResponseEntity.ok(LoginResponse.builder().token(authService.login(request)).build());
     }
 }

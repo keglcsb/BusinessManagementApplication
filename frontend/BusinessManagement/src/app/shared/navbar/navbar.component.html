@@ -1,4 +1,4 @@
-<nav id="SideBar" class="sidebar d-lg-block shadow" >
+<nav *ngIf="currentUser" id="SideBar" class="sidebar d-lg-block shadow" >
   <div class="position-sticky">
     <div class="list-group list-group-flush mx-3">
       <div class="list-group-item list-group-item-action py-2 ripple" [ngClass]="{'active': activeIssue}" (click)="goToIssues()">
@@ -15,6 +15,9 @@
       </div>
       <div class="list-group-item list-group-item-action py-2 ripple" [ngClass]="{'active': activeGroups}" (click)="goToGroup()">
         <span>Csoportok</span>
+      </div>
+      <div *ngIf="currentUser.role === Role.OWNER" class="list-group-item list-group-item-action py-2 ripple" [ngClass]="{'active': activeStatistics}" (click)="goToStatistics()">
+        <span>Statisztika</span>
       </div>
       <div class="list-group-item list-group-item-action py-2 ripple bg-danger text-bg-primary" (click)="logout()">Kijelentkezés</div>
     </div>

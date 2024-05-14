@@ -19,8 +19,6 @@ export class UserComponent implements OnInit{
   ngOnInit(): void {
     this.auth.getCurrentUser().subscribe(user =>{
       this.currentUser = user as User;
-      console.log(this.currentUser.role);
-
     });
 
     this.userService.getAllEmployess().subscribe(users =>{
@@ -35,19 +33,16 @@ export class UserComponent implements OnInit{
     if(user.role === this.currentUser.role) return;
 
     this.userService.changeRole(user.email,user.role + 1).subscribe(res=>{
-      console.log(res);
-
+      window.location.reload();
     });
-    window.location.reload();
   }
 
   demote(user: User) {
     if(user.role === 0) return;
     if(user.role >= this.currentUser.role) return;
     this.userService.changeRole(user.email,user.role - 1).subscribe(res =>{
-      console.log(res);
+      window.location.reload();
     });
-    window.location.reload();
   }
   goToRegister() {
     this.router.navigateByUrl("/register");

@@ -20,6 +20,11 @@ import { RegisterComponent } from './pages/register/register.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { GroupComponent } from './pages/group/group.component';
 import { GroupsetupComponent } from './pages/groupsetup/groupsetup.component';
+import { AddIssueComponent } from './pages/add-issue/add-issue.component';
+import { DatePipe } from './shared/pipes/date.pipe';
+import { StatusPipe } from './shared/pipes/status.pipe';
+import { StatisticsComponent } from './pages/statistics/statistics.component';
+import { ValuePipe } from './shared/pipes/value.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +39,12 @@ import { GroupsetupComponent } from './pages/groupsetup/groupsetup.component';
     NotfoundComponent,
     RegisterComponent,
     GroupComponent,
-    GroupsetupComponent
+    GroupsetupComponent,
+    AddIssueComponent,
+    DatePipe,
+    StatusPipe,
+    StatisticsComponent,
+    ValuePipe
   ],
   imports: [
     BrowserModule,

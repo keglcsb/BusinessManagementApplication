@@ -12,7 +12,7 @@ export class RegisterGuard implements CanActivate {
 
   // @ts-ignore
   canActivate(): boolean {
-    if (localStorage.getItem('auth') !== "" || localStorage.getItem("auth") === null) {
+    if (sessionStorage.getItem('auth') !== "" || sessionStorage.getItem("auth") === null) {
       let currentUser:User;
       this.auth.getCurrentUser().subscribe(user =>{
         currentUser = user as User

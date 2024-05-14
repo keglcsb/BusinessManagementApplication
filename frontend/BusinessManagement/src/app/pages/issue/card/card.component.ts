@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Issue} from "../../../shared/model/Issue";
+import {Issue, Status} from "../../../shared/model/Issue";
 
 @Component({
   selector: 'app-card',
@@ -23,4 +23,6 @@ export class CardComponent implements OnInit {
   ngOnInit(): void {
     //console.log(this.issue);
   }
+
+  protected readonly Status = Status;
 }
